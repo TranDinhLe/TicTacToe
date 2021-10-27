@@ -3,6 +3,8 @@ import numpy as np
 
 def select_move(cur_state, remain_time):
     valid_moves = cur_state.get_valid_moves
+    if cur_state.game_result(cur_state.blocks[valid_moves[0].index_local_board]) != None:
+        return np.random.choice(valid_moves)
     if len(valid_moves) != 0:
         return minimax_ab(cur_state, valid_moves)
     return None
@@ -15,12 +17,12 @@ def minimax_ab(cur_state, valid_moves):
     for move in valid_moves:
         temp = static_evaluation(cur_state, move)
         values.append(temp)
-        print(temp)
         if temp == 10 * player:
             return move
     best_value=max(values) if player == 1 else min(values)
     best_index=values.index(best_value)
-    return valid_moves[best_index]
+    print(best_value)
+
 def static_evaluation(cur_state, move):
     cur_board = cur_state.blocks[move.index_local_board]
     player=move.value
