@@ -5,6 +5,8 @@ def select_move(cur_state, remain_time):
     valid_moves = cur_state.get_valid_moves
     if cur_state.game_result(cur_state.blocks[valid_moves[0].index_local_board]) != None:
         return np.random.choice(valid_moves)
+#     if len(valid_moves) == 81 or len(valid_moves) == 9:
+#         return np.random.choice(valid_moves)
     if len(valid_moves) != 0:
         return minimax_ab(cur_state, valid_moves)
     return None
