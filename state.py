@@ -81,7 +81,7 @@ class State:
     @property
     def get_valid_moves(self):
         if self.previous_move != None:
-            index_local_board = self.previous_move.index_local_board
+            index_local_board = self.previous_move.x * 3 + self.previous_move.y
         else: 
             temp_blocks = np.zeros((3, 3))
             indices = np.where(temp_blocks == 0)
@@ -94,6 +94,7 @@ class State:
             
         local_board = self.blocks[index_local_board]
         indices = np.where(local_board == 0)
+        
         if(len(indices[0]) != 0):
             self.free_move = False
             return [UltimateTTT_Move(index_local_board, index[0], 
@@ -120,7 +121,7 @@ class State:
             return False
         
         if self.previous_move and (not self.free_move):
-            if(move.index_local_board != (self.previous_move.index_local_board)):
+            if(move.index_local_board != (self.previous_move.x * 3 + self.previous_move.y)):
                 return False
 
         board_to_move = self.blocks[move.index_local_board]
