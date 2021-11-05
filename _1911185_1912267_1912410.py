@@ -24,7 +24,7 @@ def minimax_ab(cur_state, valid_moves):
     best_value=max(values) if player == 1 else min(values)
     best_index=values.index(best_value)
     print(best_value)
-
+#false
 def static_evaluation(cur_state, move):
     cur_board = cur_state.blocks[move.index_local_board]
     player=move.value
